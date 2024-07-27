@@ -1,4 +1,3 @@
-<img src=".github/Detectron2-Logo-Horz.svg" width="300" >
 
 ## SEED
 * This repository contains the source codes for the paper "SEED: A Plug-in for High-Quality Instance Segmentation via Self-Error Estimation and Dual Refinement".
