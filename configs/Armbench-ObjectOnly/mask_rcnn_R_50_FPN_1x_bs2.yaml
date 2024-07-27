@@ -1,0 +1,19 @@
+_BASE_: "../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: True
+  RESNETS:
+    DEPTH: 50
+  ROI_HEADS:
+    NUM_CLASSES: 1
+SOLVER:
+  IMS_PER_BATCH: 2
+  # BASE_LR: 0.02
+  BASE_LR: 0.0025
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+DATASETS:
+  TRAIN: ("armbench_train_class1",)
+  # TEST: ("armbench_val_class1",)
+  TEST: ("armbench_test_class1",)
+  # TEST: ("armbench_zoomout_test",)

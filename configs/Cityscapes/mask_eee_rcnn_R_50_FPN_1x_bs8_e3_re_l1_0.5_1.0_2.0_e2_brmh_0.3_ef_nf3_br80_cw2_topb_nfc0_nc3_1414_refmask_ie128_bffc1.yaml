@@ -1,0 +1,88 @@
+_BASE_: "../Base-RCNN-FPN.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  MASK_ON: True
+  RESNETS:
+    DEPTH: 50
+  ROI_HEADS:
+    NUM_CLASSES: 8
+  ROI_BOX_HEAD:
+    # NUM_CONV: 1
+    CLS_LOSS_WEIGHT: 2.0
+    BOX_REFINE_LOSS_WEIGHT: 0.3
+    BOX_TO_BOXFIX_FEATURE_FUSION: False
+    BOX_TO_BOXFIX_FC_FEATURE_FUSION: False
+    CLS_LOGITS_TO_BOX_FIX_DIRECTLY: False
+    TRAIN_ON_PRED_BOXES: True
+    # CLS_LOGITS_TO_MB_DETACH: False
+  ROI_MASK_HEAD:
+    MASK_EEE_ON: True
+    MASK_REFINE_ON: True
+    NUM_FUSION_CONV: 0
+    MASK_LOSS_WEIGHT: 0.5
+    MASK_EEE_LOSS_WEIGHT: 1.0
+    MASK_REFINE_LOSS_WEIGHT: 2.0
+    MASK_EEE_ERROR_TYPE: 'e2'
+    BOX_REFINE_ON_MASK_HEAD: True
+    BOX_REFINE_ON_MASK_HEAD_ERROR_FUSION: True
+    NUM_FUSION_CONV_FC: 3
+    BOX_REFINE_ON_MASK_HEAD_BOX_CLASS_AGNOSTIC: False
+    NUM_CONV: 3
+    DECONV_BEFORE_MASKFIX: False
+    # DECONV_AFTER_MASKFIX: True
+    REFINEMASK_ON: True
+    I_FPN_ON: False
+    DENSE_FUSION_ON: False
+    CLS_AGNOSTIC_INITIAL_MASK: False
+    MASK_REFINE_SIZE: 14
+    CONV_DIM: 128
+    SEE_CONV_CHANNEL : 128
+    # BOXFIX_CONV_CHANNEL : 128
+    # MASKFIX_CONV_CHANNEL : 128
+    BOXFIX_NUM_FC: 1
+
+INPUT:
+  MIN_SIZE_TRAIN: (800, 832, 864, 896, 928, 960, 992, 1024)
+  MIN_SIZE_TRAIN_SAMPLING: "choice"
+  MIN_SIZE_TEST: 1024
+  MAX_SIZE_TRAIN: 2048
+  MAX_SIZE_TEST: 2048
+DATASETS:
+  TRAIN: ("cityscapes_fine_instance_seg_train",)
+  TEST: ("cityscapes_fine_instance_seg_val",)
+  # TEST: ("cityscapes_val_cocofied",)
+SOLVER:
+  BASE_LR: 0.01
+  STEPS: (18000,)
+  MAX_ITER: 24000
+  IMS_PER_BATCH: 8
+TEST:
+  EVAL_PERIOD: 8000
+
+# DATASETS:
+#   TRAIN: ("armbench_train",)
+#   # TEST: ("armbench_val",)
+#   TEST: ("armbench_test",)
+# SOLVER:
+#   IMS_PER_BATCH: 2
+#   BASE_LR: 0.0025
+#   STEPS: (60000, 80000)
+#   MAX_ITER: 90000
+
+
+# SOLVER:
+#   IMS_PER_BATCH: 16
+#   BASE_LR: 0.02
+#   STEPS: (60000, 80000)
+#   MAX_ITER: 90000
+
+# DATASETS:
+#   TRAIN: ("coco_2017_train",)
+#   TEST: ("coco_2017_val",)
+  # TEST: ("coco_2017_train",)
+
+# SOLVER:
+#   IMS_PER_BATCH: 2
+#   BASE_LR: 0.0025
+#   STEPS: (60000, 80000)
+#   MAX_ITER: 90000
