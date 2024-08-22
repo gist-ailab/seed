@@ -1,6 +1,6 @@
 
 ## SEED
-* This repository contains the source codes for the paper "SEED: A Plug-in for High-Quality Instance Segmentation via Self-Error Estimation and Dual Refinement".
+* This repository contains the source codes for the paper "SEED: Self-Error Estimation and Dual Refinement Plug-in for High-Quality Instance Segmentation".
 * Implementation of SEED based on [Detectron2](https://github.com/facebookresearch/detectron2)
 
 
